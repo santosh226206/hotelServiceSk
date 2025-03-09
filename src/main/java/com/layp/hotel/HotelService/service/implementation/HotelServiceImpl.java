@@ -34,7 +34,7 @@ public class HotelServiceImpl implements HotelService {
     @Override
     public Hotel updateHotel(String id, JsonNode HotelUpdates) {
         Hotel existingHotel = hotelepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hotel not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Hotel not found"));
 
         // Check and update fields based on the request body (JsonNode)
         if (HotelUpdates.has("name") && !HotelUpdates.get("name").isNull()) {
