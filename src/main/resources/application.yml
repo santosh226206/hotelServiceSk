@@ -20,7 +20,24 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
   application:
     name: HOTEL-SERVICE
-eureka:
+  cloud:
+    consul:
+      enabled: true
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+        health-check-timeout: 5s
+        instance-id: ${spring.application.name}:${server.port}
+        register: true
+        deregister: true
+        tags:
+          - hotel-service
+          - spring-boot
   instance:
     prefer-ip-address: true
   client:
